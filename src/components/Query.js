@@ -7,11 +7,11 @@ import Switch from "react-switch";
 
 const Query = (props) => {
     const dispatch = useDispatch();
-
+    
     const handleNumberInput = (e) => {
         const reg = /^(?=.*[0-9])$/;
         reg.test(e.target.value);
-        { dispatch(setValue({id: props.id, value:e.target.value}))}
+         dispatch(setValue({id: props.id, value:e.target.value}))
     };
 
     const operatorOptions = [
@@ -49,7 +49,7 @@ const Query = (props) => {
             placeholder="Select Variable"
             onChange={(value)=>{ dispatch(setVariable({id: props.id, variable: value.value}))}}
         />   
-        {props.variable != "Laptop is 13 Inch" &&
+        {props.variable !== "Laptop is 13 Inch" &&
             <StyledSelect
                 isSearchable ={false}
                 options={props.variable === "Session Count" ? operatorOptions : operatorOptions2 } 
@@ -58,7 +58,7 @@ const Query = (props) => {
             />   
         }
 
-        {props.variable != "Laptop is 13 Inch" &&
+        {props.variable !== "Laptop is 13 Inch" &&
         props.variable === "Session Count"? 
             <Input type="text" placeholder="Enter Number" onChange={handleNumberInput} onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]/g, '')}></Input> 
         :props.variable === "City"? 
