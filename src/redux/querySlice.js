@@ -38,6 +38,7 @@ export const valueSlice = createSlice({
         const index = state.findIndex((x) => x.id === action.payload.id);
         state[index].check = action.payload.check;    
       },
+      
       setCity : (state,action) => {
         const index = state.findIndex((x) => x.id === action.payload.id);
         state[index].city = action.payload.city;

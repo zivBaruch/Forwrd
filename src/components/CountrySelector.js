@@ -1,18 +1,29 @@
 import React from 'react';
 import { State } from 'country-state-city';
-import { Select } from "../style/Style";
 import { setCity } from '../redux/querySlice';
 import { useDispatch } from 'react-redux';
+import { StyledSelect } from '../style/Style';
 
-function CountrySelector(props) {
+const CountrySelector = (props) => {
   const dispatch = useDispatch();
-  const options = State.getStatesOfCountry("US");
+  const cities  = State.getStatesOfCountry("US");
+  let citiesOptions = [];
+   citiesOptions = cities.map((item) => {
+    return { value : item.name, label: item.name}
+    });
+    //console.log(citiesOptions);
 
-  return <Select onChange={(e)=>{ dispatch(setCity({id: props.id,city: e.target.value}))}}>
-      {options.map((item, index) => {
-          return <option key={index} value={item.name}>{item.name}</option>
-      })}
-  </Select>
+  return <StyledSelect 
+            isMulti 
+            components={{
+                IndicatorSeparator: () => null
+              }}
+              classNamePrefix = {StyledSelect}  
+            options={citiesOptions} 
+            placeholder="Select City"
+            onChange={(value)=>{ dispatch(setCity({id: props.id,city: value.map(x=> x.value)}))}}
+        />
+
 }
 
 export default CountrySelector;
