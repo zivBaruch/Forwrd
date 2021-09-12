@@ -2,7 +2,7 @@ import React from 'react';
 import { State } from 'country-state-city';
 import { setCity } from '../redux/querySlice';
 import { useDispatch } from 'react-redux';
-import { StyledSelect } from '../style/Style';
+import { StyledSelect, customStyles } from '../style/Style';
 
 const CountrySelector = (props) => {
   const dispatch = useDispatch();
@@ -14,6 +14,7 @@ const CountrySelector = (props) => {
     //console.log(citiesOptions);
 
   return <StyledSelect 
+            styles={customStyles}
             isMulti 
             components={{
                 IndicatorSeparator: () => null
@@ -21,7 +22,7 @@ const CountrySelector = (props) => {
               classNamePrefix = {StyledSelect}  
             options={citiesOptions} 
             placeholder="Select City"
-            onChange={(value)=>{ dispatch(setCity({id: props.id,city: value.map(x=> x.value)}))}}
+            onChange={(value)=>{ dispatch(setCity({index:props.index, city: value.map(x=> x.value)}))}}
         />
 
 }

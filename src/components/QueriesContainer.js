@@ -11,8 +11,8 @@ const QueriesContainer = () => {
     
     return(
         <div>
-            {value.map((item) => {
-                return <Query key={item.id} id={item.id} variable={item.variable} operator={item.operator} check={item.check}/>
+            {value.map((item, index) => {
+                return <Query key={item.id} index={index} id={item.id} variable={item.variable} operator={item.operator} check={item.check}/>
             })}
             {value.length <=3 ?
             <Button onClick={(e)=>{ dispatch(addNewQuery({}))}}>

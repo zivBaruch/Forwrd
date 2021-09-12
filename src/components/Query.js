@@ -1,18 +1,12 @@
 import React from "react";
 import { useDispatch } from 'react-redux';
 import {deleteQuery, setVariable, setOperator, setValue, setDevice, toggleCheckBox} from '../redux/querySlice'
-import { SwichHolder, Input, Remove, StyledSelect } from "../style/Style";
+import { SwichHolder, Input, Remove, StyledSelect, customStyles } from "../style/Style";
 import CountrySelector from "./CountrySelector";
 import Switch from "react-switch";
 
 const Query = (props) => {
     const dispatch = useDispatch();
-    
-    const handleNumberInput = (e) => {
-        const reg = /^(?=.*[0-9])$/;
-        reg.test(e.target.value);
-         dispatch(setValue({id: props.id, value:e.target.value}))
-    };
 
     const operatorOptions = [
         {value : 'is', label: 'is'},
@@ -30,7 +24,7 @@ const Query = (props) => {
         {value : 'City', label: 'City'},
         {value : 'Device', label: 'Device'},
         {value : 'Session Count', label: 'Session Count'},
-        {value : 'Laptop is 13 Inch', label: 'Laptop is 13 Inch'},
+        {value : 'isMobile', label: 'isMobile'},
     ];
 
     const deviceOptions = [
@@ -38,46 +32,49 @@ const Query = (props) => {
         {value : 'Tablet', label: 'Tablet'},
         {value : 'iPhone', label: 'iPhone'},
         {value : 'Android Phone', label: 'Android Phone'},
+        {value : 'Laptop 13 inch', label: 'Laptop 13 inch'},
     ];
 
     return(
         <div>
 
         <StyledSelect
+            styles={customStyles}
             isSearchable ={false}
             options={variableOptions} 
             placeholder="Select Variable"
-            onChange={(value)=>{ dispatch(setVariable({id: props.id, variable: value.value}))}}
-        />   
-        {props.variable !== "Laptop is 13 Inch" &&
-            <StyledSelect
-                isSearchable ={false}
-                options={props.variable === "Session Count" ? operatorOptions : operatorOptions2 } 
-                placeholder="Select Operator"
-                onChange={(value)=>{ dispatch(setOperator({id: props.id, operator: value.value}))}}
-            />   
-        }
+            onChange={(value)=>{ dispatch(setVariable({index:props.index, variable: value.value}))}}
+        />  
 
-        {props.variable !== "Laptop is 13 Inch" &&
+        <StyledSelect
+            styles={customStyles}
+            isSearchable ={false}
+            options={props.variable === "Session Count" ? operatorOptions : operatorOptions2 } 
+            placeholder="Select Operator"
+            onChange={(value)=>{ dispatch(setOperator({index:props.index, operator: value.value}))}}
+        />   
+
+        {props.variable !== "isMobile" &&
         props.variable === "Session Count"? 
-            <Input type="text" placeholder="Enter Number" onChange={handleNumberInput} onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]/g, '')}></Input> 
+            <Input type="number" placeholder="Enter Number" onChange={(e) => dispatch(setValue({index:props.index, value:e.target.value}))} ></Input> 
         :props.variable === "City"? 
-            <CountrySelector id={props.id}/>
+            <CountrySelector index={props.index}/>
         :props.variable === "Device"? 
         <StyledSelect
+            styles={customStyles}
             isSearchable ={false}
             options={deviceOptions} 
             placeholder="Select Device"
-            onChange={(value)=>{ dispatch(setDevice({id: props.id, device: value.value}))}}
+            onChange={(value)=>{ dispatch(setDevice({index:props.index, device: value.value}))}}
         />          
         :null }
 
-        {props.variable === "Laptop is 13 Inch" &&
+        {props.variable === "isMobile" &&
         <SwichHolder >
-            <Switch uncheckedIcon={false} checkedIcon={false} onColor={'#468ff0'} checked={props.check} onChange={() => { dispatch(toggleCheckBox({id: props.id, check: !props.check}))}} />
+            <Switch uncheckedIcon={false} checkedIcon={false} onColor={'#468ff0'} checked={props.check} onChange={() => { dispatch(toggleCheckBox({index:props.index, check: !props.check}))}} />
         </SwichHolder>
         }
-        <Remove onClick={()=>{ dispatch(deleteQuery({id: props.id}))}}>
+        <Remove onClick={()=>{ dispatch(deleteQuery({index:props.index}))}}>
                remove
         </Remove>
 

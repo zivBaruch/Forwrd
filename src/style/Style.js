@@ -18,13 +18,19 @@ export const Input = styled.input`
     border-style: solid;
     border-width: 1px;
     width: 258px;  
-   
-  font-family: system-ui;
-  font-size: inherit;
+
+    
+    font-family: system-ui;
+    font-size: inherit;
     &:focus {
         outline: none;
         border-color: rgb(38,132,255);
         box-shadow: rgb(38,132,255) 0px 0px 0px 1px ;
+    }
+    ::-webkit-inner-spin-button, 
+    ::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
     }
 
 `;
@@ -75,6 +81,7 @@ export const SwichHolder = styled.div`
     position: relative;
     padding: 0px 5px;
     vertical-align: middle;
+    width: 280px;
 `;
 
 export const OutPut = styled.div`
@@ -82,3 +89,10 @@ export const OutPut = styled.div`
     font-size: 14px;
     margin: 5px 15px;
 `;
+
+export const customStyles = {
+    menu: (provided) => ({
+      ...provided,
+      width:280,
+    }),
+  }

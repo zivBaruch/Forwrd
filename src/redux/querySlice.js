@@ -4,9 +4,6 @@ export const valueSlice = createSlice({
   name: "queryValue",
   initialState : [],
   reducers: {
-      queryData: (state, action) => {
-          state.value = action.payload;
-      },
       addNewQuery : (state) => {
           const newQuery = {
             id: Date.now(),
@@ -20,37 +17,30 @@ export const valueSlice = createSlice({
           state.push(newQuery);
       },
       deleteQuery : (state , action) =>{
-        return state.filter(x => x.id !== action.payload.id);
+        state.splice(action.payload.index, 1);
       },
       setVariable : (state,action) => {
-        const index = state.findIndex((x) => x.id === action.payload.id);
-        state[index].variable = action.payload.variable;
+        state[action.payload.index].variable = action.payload.variable;
       },
       setOperator : (state,action) => {
-        const index = state.findIndex((x) => x.id === action.payload.id);
-        state[index].operator = action.payload.operator;
+        state[action.payload.index].operator = action.payload.operator;
       }, 
       setValue : (state,action) => {
-        const index = state.findIndex((x) => x.id === action.payload.id);
-        state[index].value = action.payload.value;
+        state[action.payload.index].value = action.payload.value;
       },
       toggleCheckBox: (state,action) => {
-        const index = state.findIndex((x) => x.id === action.payload.id);
-        state[index].check = action.payload.check;    
+        state[action.payload.index].check = action.payload.check;    
       },
-      
       setCity : (state,action) => {
-        const index = state.findIndex((x) => x.id === action.payload.id);
-        state[index].city = action.payload.city;
+        state[action.payload.index].city = action.payload.city;
       },   
       setDevice : (state,action) => {
-        const index = state.findIndex((x) => x.id === action.payload.id);
-        state[index].device = action.payload.device;
+        state[action.payload.index].device = action.payload.device;
       },                    
   },
 });
 
-export const { queryData, addNewQuery, deleteQuery, setOperator, setVariable, setValue, toggleCheckBox, setCity, setDevice } = valueSlice.actions;
+export const { addNewQuery, deleteQuery, setOperator, setVariable, setValue, toggleCheckBox, setCity, setDevice } = valueSlice.actions;
 
 
 export default valueSlice.reducer;
