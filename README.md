@@ -19,9 +19,13 @@ You will also see any lint errors in the console.
 Please install the following packages
 
 npm install react-redux
+
 npm install @reduxjs/toolkit
+
 npm install styled-components
 
 npm install react-select
+
 npm install country-state-city
+
 npm install react-switch
