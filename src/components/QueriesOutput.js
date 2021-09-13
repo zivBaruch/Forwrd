@@ -18,7 +18,7 @@ const QueriesOutput = () => {
                                  {item.city !== '' && <span> {`${item.city} `} </span> }
                                  {item.device !== '' && <span> {item.device} </span> }
                                  {item.check !== '' && item.variable === "isMobile" && item.check === true ? <span> true </span> : item.variable === "isMobile" && item.check !== true ?  <span> false </span> : null}                                 
-                                 {arr.length-1 !== index && item.variable !== "" && item.operator !== '' && <span> OR </span>}                                
+                                 {arr.length-1 !== index && item.variable !== "" && item.operator !== '' && <span>OR</span>}                                
                             </span>)
                 })}
         </OutPut>

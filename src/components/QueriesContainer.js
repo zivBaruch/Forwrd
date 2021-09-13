@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from 'react-redux';
 import { useSelector } from "react-redux";
-import { addNewQuery } from '../redux/querySlice';
+import { setElement } from '../redux/querySlice';
 import Query from './Query';
 import { Button } from "../style/Style";
 
@@ -15,7 +15,7 @@ const QueriesContainer = () => {
                 return <Query key={item.id} index={index} id={item.id} variable={item.variable} operator={item.operator} check={item.check}/>
             })}
             {value.length <=3 ?
-            <Button onClick={(e)=>{ dispatch(addNewQuery({}))}}>
+            <Button onClick={(e)=>{ dispatch(setElement({thisElement : 'Add'}))}}>
                 +Add Property
             </Button>                    
             : null}          

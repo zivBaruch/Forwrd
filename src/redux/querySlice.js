@@ -3,8 +3,10 @@ import { createSlice } from '@reduxjs/toolkit'
 export const valueSlice = createSlice({
   name: "queryValue",
   initialState : [],
-  reducers: {
-      addNewQuery : (state) => {
+  reducers: {                
+      setElement : (state,action) => {
+        
+        if(action.payload.thisElement === 'Add'){
           const newQuery = {
             id: Date.now(),
             variable:'',
@@ -15,32 +17,19 @@ export const valueSlice = createSlice({
             device: '',
           };
           state.push(newQuery);
-      },
-      deleteQuery : (state , action) =>{
-        state.splice(action.payload.index, 1);
-      },
-      setVariable : (state,action) => {
-        state[action.payload.index].variable = action.payload.variable;
-      },
-      setOperator : (state,action) => {
-        state[action.payload.index].operator = action.payload.operator;
-      }, 
-      setValue : (state,action) => {
-        state[action.payload.index].value = action.payload.value;
-      },
-      toggleCheckBox: (state,action) => {
-        state[action.payload.index].check = action.payload.check;    
-      },
-      setCity : (state,action) => {
-        state[action.payload.index].city = action.payload.city;
-      },   
-      setDevice : (state,action) => {
-        state[action.payload.index].device = action.payload.device;
+
+        }else if(action.payload.thisElement === 'Remove'){  
+          
+          state.splice(action.payload.index, 1);
+
+        }else{  
+          state[action.payload.index][action.payload.thisElement] = action.payload.val;   
+        }
       },                    
   },
 });
 
-export const { addNewQuery, deleteQuery, setOperator, setVariable, setValue, toggleCheckBox, setCity, setDevice } = valueSlice.actions;
+export const { setElement } = valueSlice.actions;
 
 
 export default valueSlice.reducer;

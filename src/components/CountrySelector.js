@@ -1,6 +1,6 @@
 import React from 'react';
 import { State } from 'country-state-city';
-import { setCity } from '../redux/querySlice';
+import { setElement } from '../redux/querySlice';
 import { useDispatch } from 'react-redux';
 import { StyledSelect, customStyles } from '../style/Style';
 
@@ -22,7 +22,7 @@ const CountrySelector = (props) => {
               classNamePrefix = {StyledSelect}  
             options={citiesOptions} 
             placeholder="Select City"
-            onChange={(value)=>{ dispatch(setCity({index:props.index, city: value.map(x=> x.value)}))}}
+            onChange={(value)=>{ dispatch(setElement({index:props.index, val: value.map(x=> x.value), thisElement:'city'}))}}
         />
 
 }
