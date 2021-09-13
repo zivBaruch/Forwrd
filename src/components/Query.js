@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from 'react-redux';
-import {deleteQuery, setVariable, setOperator, setValue, setDevice, toggleCheckBox, setElement} from '../redux/querySlice'
+import { setElement} from '../redux/querySlice'
 import { SwichHolder, Input, Remove, StyledSelect, customStyles } from "../style/Style";
 import CountrySelector from "./CountrySelector";
 import Switch from "react-switch";
